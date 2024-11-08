@@ -28,7 +28,7 @@ router.post("/", verifyJwt, async (req, res) => {
     }
 });
 
-router.get("/", verifyJwt, async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         const posts = await Post.aggregate([
             {
@@ -84,7 +84,7 @@ router.get("/", verifyJwt, async (req, res) => {
     }
 });
 
-router.get("/:slug", verifyJwt, async (req, res) => {
+router.get("/:slug", async (req, res) => {
     const { params: { slug } } = req;
 
     try {

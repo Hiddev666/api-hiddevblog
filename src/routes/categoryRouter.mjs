@@ -23,7 +23,7 @@ router.post("/", verifyJwt, async (req, res) => {
     }
 });
 
-router.get("/", verifyJwt, async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         const category = await Category.find().select({ __v: 0 });
         res.send({
@@ -37,7 +37,7 @@ router.get("/", verifyJwt, async (req, res) => {
     }
 });
 
-router.get("/:id", verifyJwt, async (req, res) => {
+router.get("/:id", async (req, res) => {
     const { params: { id } } = req;
 
     try {
