@@ -10,7 +10,7 @@ dotenv.config();
 const router = Router();
 
 // Register
-router.post("/", verifyJwt, async (req, res) => {
+router.post("/api/posts/", verifyJwt, async (req, res) => {
     const { body } = req;
     const slug = slugify(body.title).toLowerCase();
     body.slug = slug;
@@ -28,7 +28,7 @@ router.post("/", verifyJwt, async (req, res) => {
     }
 });
 
-router.get("/", async (req, res) => {
+router.get("/api/posts/", async (req, res) => {
     try {
         const posts = await Post.aggregate([
             {
@@ -84,7 +84,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.get("/:slug", async (req, res) => {
+router.get("/api/posts/:slug", async (req, res) => {
     const { params: { slug } } = req;
 
     try {
@@ -140,7 +140,7 @@ router.get("/:slug", async (req, res) => {
     }
 });
 
-router.patch("/:slug", verifyJwt, async (req, res) => {
+router.patch("/api/posts/:slug", verifyJwt, async (req, res) => {
     const { body, params: { slug } } = req
 
     try {
@@ -156,7 +156,7 @@ router.patch("/:slug", verifyJwt, async (req, res) => {
     }
 }); 
 
-router.delete("/:slug", verifyJwt, async (req, res) => {
+router.delete("/api/posts/:slug", verifyJwt, async (req, res) => {
     const { params: { slug } } = req;
 
     try {
@@ -170,6 +170,4 @@ router.delete("/:slug", verifyJwt, async (req, res) => {
         })
     }
 });
-
-router.use("/api/posts", router);
 export default router;
