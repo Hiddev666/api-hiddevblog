@@ -7,7 +7,7 @@ dotenv.config();
 const router = Router();
 
 // Register
-router.post("/", verifyJwt, async (req, res) => {
+router.post("/api/categories/", verifyJwt, async (req, res) => {
     const { body } = req;
 
     try {
@@ -23,7 +23,7 @@ router.post("/", verifyJwt, async (req, res) => {
     }
 });
 
-router.get("/", async (req, res) => {
+router.get("/api/categories/", async (req, res) => {
     try {
         const category = await Category.find().select({ __v: 0 });
         res.send({
@@ -37,7 +37,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/api/categories/:id", async (req, res) => {
     const { params: { id } } = req;
 
     try {
@@ -53,7 +53,7 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-router.patch("/:id", verifyJwt, async (req, res) => {
+router.patch("/api/categories/:id", verifyJwt, async (req, res) => {
     const { body, params: { id } } = req;
 
     try {
@@ -69,7 +69,7 @@ router.patch("/:id", verifyJwt, async (req, res) => {
     }
 });
 
-router.delete("/:id", verifyJwt, async (req, res) => {
+router.delete("/api/categories/:id", verifyJwt, async (req, res) => {
     const { params: { id } } = req;
 
     try {
@@ -84,5 +84,4 @@ router.delete("/:id", verifyJwt, async (req, res) => {
     }
 });
 
-router.use("/api/categories", router);
 export default router;

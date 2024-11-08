@@ -10,7 +10,7 @@ dotenv.config();
 const router = Router();
 
 // Register
-router.post("/register", async (req, res) => {
+router.post("/api/auth/register", async (req, res) => {
     const { body } = req;
 
     const encryptedPassword = CryptoJS.AES.encrypt(
@@ -32,7 +32,7 @@ router.post("/register", async (req, res) => {
     }
 });
 
-router.post("/login", async (req, res) => {
+router.post("/api/auth/login", async (req, res) => {
     const { body } = req;
     
     try {
@@ -68,7 +68,7 @@ router.post("/login", async (req, res) => {
     }
 });
 
-router.post("/logout", verifyJwt, async (req, res) => {
+router.post("/api/auth/logout", verifyJwt, async (req, res) => {
     const token = req.header("Authorization").split(" ")[1];
     
     try {
@@ -83,5 +83,4 @@ router.post("/logout", verifyJwt, async (req, res) => {
     }
 });
 
-router.use("/api/auth", router);
 export default router;
